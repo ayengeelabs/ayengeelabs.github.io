@@ -2,7 +2,8 @@
 
 This repository hosts the official website, app product showcases, and privacy policies for **Ayengee Labs**, deployed on GitHub Pages.
 
-🌐 **Live Website**: [https://shubhanshu-222.github.io/ayengeelabs.github.io/](https://shubhanshu-222.github.io/ayengeelabs.github.io/)
+🌐 **Live Website**: [https://ayengeelabs.github.io](https://ayengeelabs.github.io)
+📧 **Support**: `support.ayengee@gmail.com` | **Inquiries**: `ayengee@gmail.com`
 
 ---
 
