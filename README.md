@@ -13,6 +13,9 @@ This repository hosts the official website, app product showcases, and privacy p
 | :--- | :--- | :--- |
 | **Developer Website** | `index.html` | Play Console Developer Profile |
 | **Contact & Support** | `contact.html` | Play Console Support URL |
+| **Pomo-One App Details** | `apps/pomoone.html` | Play Store App Listing URL (`com.pomoone.app`) |
+| **Pomo-One Privacy Policy** | `privacy/pomoone.html` | Play Console App Content Privacy Policy |
+| **Pomo-One Terms & Conditions** | `terms/pomoone.html` | App Terms & Conditions URL |
 | **Telepath App Details** | `apps/telepath.html` | Play Store App Listing URL (`com.ayengee.telepath`) |
 | **Telepath Privacy Policy** | `privacy/telepath.html` | Play Console App Content Privacy Policy |
 | **FortressFi App Details** | `apps/fortressfi.html` | Play Store App Listing URL (`com.ayengee.fortressfi`) |
