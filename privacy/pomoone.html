@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - Pomo-One | Ayengee Labs</title>
-  <meta name="description" content="Privacy Policy for Pomo-One focus instrument developed by Ayengee Labs. Absolute data sovereignty, zero telemetry, and local-first storage.">
+  <meta name="description" content="Privacy Policy for Pomo-One focus instrument developed by Ayengee Labs. Absolute data sovereignty, zero telemetry, Google Play licensing verification, and local-first storage.">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#0B0D13] text-gray-300 min-h-screen font-sans py-12 px-6 selection:bg-orange-500 selection:text-white">
@@ -33,15 +33,16 @@
       <section>
         <h2 class="text-base font-bold text-white mb-2">2. Categories of Data Processed &amp; Storage Scope</h2>
         <div class="space-y-3">
-          <p><strong class="text-white">A. Data Stored Locally on Your Device (Encrypted SQLite):</strong> Focus session records (timestamps, planned and actual durations, completion states), behavioral telemetry counts (screen touches, physical pickups, premature stops), optional personal notes/tags, and user preferences (visual themes, clock face styles, metronome BPM, audio volume). This data is stored strictly in local Android Room persistence and is never transmitted across any network.</p>
+          <p><strong class="text-white">A. Data Stored Locally on Your Device (Encrypted SQLite):</strong> Focus session records (timestamps, planned and actual durations, completion states), behavioral telemetry counts (screen touches, physical pickups, premature stops), optional personal notes/tags, and user preferences (visual themes, clock face styles, clock numeral system, app language, custom metronome BPM, audio volume). This data is stored strictly in local Android Room persistence and is never transmitted across any network.</p>
           <p><strong class="text-white">B. Ephemeral Sensor Data (Not Stored):</strong> When the Pickup Alert is armed, Pomo-One samples your accelerometer and gyroscope hardware in real-time volatile RAM to detect resting stability and movement. Sensor data is processed in milliseconds and immediately discarded. Raw sensor vectors are never written to disk or transmitted.</p>
-          <p><strong class="text-white">C. Authentication Data:</strong> If you use Google Credential Manager / Passkeys, verification is executed directly through Google Play Services APIs. Pomo-One never sees or stores passwords, biometrics, or credit card info. In Guest Mode, no credential exchange takes place whatsoever.</p>
+          <p><strong class="text-white">C. Authentication Data:</strong> When you authenticate via Google Sign-In or Android’s native Credential Manager, verification is executed directly through Google Play Services cryptographic APIs. Pomo-One never receives, reads, logs, or stores your Google password, biometrics, or credit card information. All focus metrics stay stored strictly in your local device SQLite database.</p>
         </div>
       </section>
 
       <section>
         <h2 class="text-base font-bold text-white mb-2">3. Android Permissions &amp; System Usage</h2>
         <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>com.android.vending.CHECK_LICENSE:</strong> Allows Pomo-One to bind via secure AIDL IPC to the local Google Play client to verify that the active account has purchased a valid license. Does not collect user browsing habits, private contacts, or telemetry.</li>
           <li><strong>ACCESS_NOTIFICATION_POLICY:</strong> Used solely to automate Do Not Disturb (Android Zen Rule) during active countdown blocks. Pomo-One cannot read notification contents, sender names, or personal messages.</li>
           <li><strong>VIBRATE:</strong> Delivers tactile minute markers, timer completion chimes, and pickup alert pulses.</li>
           <li><strong>FOREGROUND_SERVICE &amp; MEDIA_PLAYBACK:</strong> Keeps countdown timers and acoustic metronomes running reliably when the screen is dimmed or minimized.</li>
@@ -53,7 +54,7 @@
 
       <section>
         <h2 class="text-base font-bold text-white mb-2">4. Third-Party Trackers &amp; Analytics Disclosure</h2>
-        <p>Pomo-One contains <strong>no</strong> Google Analytics, <strong>no</strong> Meta/Facebook SDKs, <strong>no</strong> advertising networks (AdMob, Unity, AppLovin), and <strong>no</strong> commercial telemetry SDKs. Your device behavior is completely invisible to advertisers and data brokers.</p>
+        <p>Pomo-One contains <strong>no</strong> Google Analytics for Firebase, <strong>no</strong> Meta/Facebook SDKs, <strong>no</strong> advertising networks (AdMob, Unity, AppLovin), and <strong>no</strong> commercial telemetry SDKs. Your device behavior is completely invisible to advertisers and data brokers.</p>
       </section>
 
       <section>
@@ -61,13 +62,14 @@
         <ul class="list-disc pl-5 space-y-1">
           <li><strong>In-App Reset:</strong> Tapping <em>Settings &rarr; Reset All Data</em> performs an instant database purge that permanently wipes all session history and metrics from your device.</li>
           <li><strong>App Uninstall:</strong> Uninstalling the app causes Android to immediately erase the sandboxed storage directory (<code class="text-xs bg-gray-900 px-1 py-0.5 rounded text-gray-300 font-mono">/data/data/com.pomoone.app/</code>), permanently deleting all database files.</li>
+          <li><strong>Zero Cloud Databases:</strong> Session databases are not uploaded to remote servers or cloud databases, guaranteeing total data confidentiality.</li>
           <li><strong>Web Deletion Portal:</strong> In compliance with Google Play transparency policies, access our <a href="/apps/pomoone.html#delete-account" class="text-orange-400 underline">Account &amp; Data Deletion Portal</a>.</li>
         </ul>
       </section>
 
       <section>
         <h2 class="text-base font-bold text-white mb-2">6. Children's Privacy (COPPA Compliance)</h2>
-        <p>Pomo-One does not knowingly collect personal information from children under the age of 13. Because the application operates offline without central databases or accounts, it is safe for users of all ages.</p>
+        <p>Pomo-One does not knowingly collect personal information from children under the age of 13. Because the application operates offline without central databases or tracking accounts, it is safe for users of all ages.</p>
       </section>
 
       <section class="border-t border-gray-800 pt-6">
