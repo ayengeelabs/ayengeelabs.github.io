@@ -1,111 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="default">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayengee Labs | Applied AI & Mobile Systems</title>
   <meta name="description" content="Ayengee Labs builds local-first cognitive tools, on-device intelligence, and privacy-preserving mobile software.">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Immediate theme initialization to prevent flash of wrong theme (FOUC)
+    (function() {
+      const savedTheme = localStorage.getItem('ayengee-theme') || 'default';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+  <style>
+    /* Theme Definitions via CSS Custom Properties */
+    :root, [data-theme="default"] {
+      --bg-canvas: #0B0D13;
+      --bg-card: #121620;
+      --border-card: rgba(31, 41, 55, 0.8);
+      --border-header: rgba(31, 41, 55, 0.8);
+      --text-primary: #F9FAFB;
+      --text-secondary: #9CA3AF;
+      --text-muted: #6B7280;
+      --nav-link: #9CA3AF;
+      --nav-link-hover: #FFFFFF;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      --menu-bg: #161B26;
+      --menu-border: #1F2937;
+      --btn-theme-bg: rgba(255, 255, 255, 0.06);
+      --btn-theme-border: rgba(255, 255, 255, 0.12);
+      --badge-bg-pomo: rgba(67, 20, 7, 0.6);
+      --badge-text-pomo: #fdba74;
+      --badge-border-pomo: rgba(154, 52, 18, 0.5);
+      --badge-bg-telepath: rgba(46, 16, 101, 0.6);
+      --badge-text-telepath: #d8b4fe;
+      --badge-border-telepath: rgba(107, 33, 168, 0.5);
+      --badge-bg-fortress: rgba(6, 78, 59, 0.6);
+      --badge-text-fortress: #6ee7b7;
+      --badge-border-fortress: rgba(4, 120, 87, 0.5);
+      --badge-bg-eduplay: rgba(120, 53, 15, 0.6);
+      --badge-text-eduplay: #fcd34d;
+      --badge-border-eduplay: rgba(180, 83, 9, 0.5);
+    }
+
+    [data-theme="warm-slate"] {
+      --bg-canvas: #F8F9FA;
+      --bg-card: #FFFFFF;
+      --border-card: #E2E8F0;
+      --border-header: #E2E8F0;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #94A3B8;
+      --nav-link: #475569;
+      --nav-link-hover: #0F172A;
+      --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      --menu-bg: #FFFFFF;
+      --menu-border: #E2E8F0;
+      --btn-theme-bg: #F1F5F9;
+      --btn-theme-border: #CBD5E1;
+      --badge-bg-pomo: #FFF7ED;
+      --badge-text-pomo: #C2410C;
+      --badge-border-pomo: #FFEDD5;
+      --badge-bg-telepath: #FAF5FF;
+      --badge-text-telepath: #7E22CE;
+      --badge-border-telepath: #F3E8FF;
+      --badge-bg-fortress: #ECFDF5;
+      --badge-text-fortress: #047857;
+      --badge-border-fortress: #D1FAE5;
+      --badge-bg-eduplay: #FFFBEB;
+      --badge-text-eduplay: #B45309;
+      --badge-border-eduplay: #FEF3C7;
+    }
+
+    [data-theme="cool-frost"] {
+      --bg-canvas: #F0F4F8;
+      --bg-card: #FFFFFF;
+      --border-card: #CBD5E1;
+      --border-header: #CBD5E1;
+      --text-primary: #0A0E17;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --nav-link: #334155;
+      --nav-link-hover: #0A0E17;
+      --card-shadow: 0 4px 20px -2px rgba(10, 14, 23, 0.08);
+      --menu-bg: #FFFFFF;
+      --menu-border: #CBD5E1;
+      --btn-theme-bg: #E2E8F0;
+      --btn-theme-border: #94A3B8;
+      --badge-bg-pomo: #EFF6FF;
+      --badge-text-pomo: #1D4ED8;
+      --badge-border-pomo: #DBEAFE;
+      --badge-bg-telepath: #EEF2FF;
+      --badge-text-telepath: #4338CA;
+      --badge-border-telepath: #E0E7FF;
+      --badge-bg-fortress: #F0FDFA;
+      --badge-text-fortress: #0F766E;
+      --badge-border-fortress: #CCFBF1;
+      --badge-bg-eduplay: #FEF2F2;
+      --badge-text-eduplay: #B91C1C;
+      --badge-border-eduplay: #FEE2E2;
+    }
+
+    [data-theme="editorial-sand"] {
+      --bg-canvas: #FAF7F2;
+      --bg-card: #FFFFFF;
+      --border-card: #E7E5E4;
+      --border-header: #E7E5E4;
+      --text-primary: #1C1917;
+      --text-secondary: #57534E;
+      --text-muted: #78716C;
+      --nav-link: #57534E;
+      --nav-link-hover: #1C1917;
+      --card-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.06);
+      --menu-bg: #FFFFFF;
+      --menu-border: #E7E5E4;
+      --btn-theme-bg: #F5F5F4;
+      --btn-theme-border: #D6D3D1;
+      --badge-bg-pomo: #FFF7ED;
+      --badge-text-pomo: #9A3412;
+      --badge-border-pomo: #FED7AA;
+      --badge-bg-telepath: #F5F3FF;
+      --badge-text-telepath: #6D28D9;
+      --badge-border-telepath: #DDD6FE;
+      --badge-bg-fortress: #F0FDF4;
+      --badge-text-fortress: #15803D;
+      --badge-border-fortress: #BBF7D0;
+      --badge-bg-eduplay: #FEFCE8;
+      --badge-text-eduplay: #854D0E;
+      --badge-border-eduplay: #FEF08A;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .themed-card {
+      background-color: var(--bg-card);
+      border-color: var(--border-card);
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s ease;
+    }
+
+    .themed-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
-<body class="bg-[#0B0D13] text-gray-200 min-h-screen flex flex-col font-sans selection:bg-violet-500 selection:text-white">
+<body class="min-h-screen flex flex-col font-sans selection:bg-violet-500 selection:text-white">
   <!-- Header -->
-  <header class="border-b border-gray-800/80 px-6 py-4 flex justify-between items-center max-w-6xl w-full mx-auto">
-    <div class="flex items-center space-x-3">
-      <a href="/" class="text-xl font-bold tracking-tight text-white hover:opacity-90 transition">
-        AYENGEE<span class="text-violet-500">LABS</span>
-      </a>
+  <header class="px-6 py-4 border-b transition-colors" style="border-color: var(--border-header);">
+    <div class="max-w-6xl w-full mx-auto flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <a href="/" class="text-xl font-bold tracking-tight hover:opacity-90 transition" style="color: var(--text-primary);">
+          AYENGEE<span class="text-violet-500">LABS</span>
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-4 sm:space-x-6 text-sm">
+        <nav class="flex items-center space-x-5">
+          <a href="#apps" class="transition" style="color: var(--nav-link);" onmouseover="this.style.color='var(--nav-link-hover)'" onmouseout="this.style.color='var(--nav-link)'">Apps</a>
+          <a href="/contact.html" class="transition" style="color: var(--nav-link);" onmouseover="this.style.color='var(--nav-link-hover)'" onmouseout="this.style.color='var(--nav-link)'">Contact & Support</a>
+        </nav>
+
+        <!-- Theme Switcher Pill -->
+        <div class="relative">
+          <button id="themeMenuBtn" onclick="toggleThemeMenu()" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition cursor-pointer" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-primary);">
+            <span class="text-sm">🎨</span>
+            <span id="currentThemeName">Theme: Default</span>
+            <svg class="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="themeDropdown" class="hidden absolute right-0 mt-2 w-64 rounded-2xl p-2 shadow-2xl z-50 transition-all border" style="background-color: var(--menu-bg); border-color: var(--menu-border);">
+            <div class="px-3 py-2 text-[11px] font-mono uppercase tracking-wider opacity-60">Select Visual Mood</div>
+
+            <!-- Option 1: Default -->
+            <button onclick="setTheme('default')" type="button" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs transition cursor-pointer hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--text-primary);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-4 h-4 rounded-full border border-gray-600 inline-block" style="background: #0B0D13;"></span>
+                <div>
+                  <div class="font-semibold">Midnight Obsidian</div>
+                  <div class="text-[10px] opacity-60">Default Dark Mode</div>
+                </div>
+              </div>
+              <span id="check-default" class="text-violet-500 font-bold hidden">✓</span>
+            </button>
+
+            <!-- Option 2: Warm Slate -->
+            <button onclick="setTheme('warm-slate')" type="button" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs transition cursor-pointer hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--text-primary);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-4 h-4 rounded-full border border-gray-300 inline-block" style="background: #F8F9FA;"></span>
+                <div>
+                  <div class="font-semibold">Warm Slate & Oatmeal</div>
+                  <div class="text-[10px] opacity-60">2026 Recommended Light</div>
+                </div>
+              </div>
+              <span id="check-warm-slate" class="text-violet-500 font-bold hidden">✓</span>
+            </button>
+
+            <!-- Option 3: Cool Frost -->
+            <button onclick="setTheme('cool-frost')" type="button" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs transition cursor-pointer hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--text-primary);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-4 h-4 rounded-full border border-blue-200 inline-block" style="background: #F0F4F8;"></span>
+                <div>
+                  <div class="font-semibold">Minimalist Cool Frost</div>
+                  <div class="text-[10px] opacity-60">Nordic Crisp Light</div>
+                </div>
+              </div>
+              <span id="check-cool-frost" class="text-violet-500 font-bold hidden">✓</span>
+            </button>
+
+            <!-- Option 4: Editorial Sand -->
+            <button onclick="setTheme('editorial-sand')" type="button" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs transition cursor-pointer hover:bg-black/5 dark:hover:bg-white/5" style="color: var(--text-primary);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-4 h-4 rounded-full border border-stone-300 inline-block" style="background: #FAF7F2;"></span>
+                <div>
+                  <div class="font-semibold">Warm Editorial Sand</div>
+                  <div class="text-[10px] opacity-60">Notion / Linear Linen</div>
+                </div>
+              </div>
+              <span id="check-editorial-sand" class="text-violet-500 font-bold hidden">✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <nav class="space-x-6 text-sm text-gray-400">
-      <a href="#apps" class="hover:text-white transition">Apps</a>
-      <a href="/contact.html" class="hover:text-white transition">Contact & Support</a>
-    </nav>
   </header>
 
   <!-- Hero Section -->
-  <main class="flex-grow max-w-6xl w-full mx-auto px-6 py-16">
+  <main class="flex-grow max-w-6xl w-full mx-auto px-6 py-14 sm:py-20">
     <div class="max-w-3xl mb-16">
-      <span class="text-xs uppercase tracking-widest text-violet-400 font-mono">Independent Applied Systems</span>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white mt-3 leading-tight tracking-tight">
+      <span class="text-xs uppercase tracking-widest text-violet-500 font-mono font-semibold">Independent Applied Systems</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mt-3 leading-tight tracking-tight" style="color: var(--text-primary);">
         Building local-first cognitive tools and intelligent software.
       </h1>
-      <p class="text-gray-400 mt-5 text-base sm:text-lg leading-relaxed">
+      <p class="mt-5 text-base sm:text-lg leading-relaxed" style="color: var(--text-secondary);">
         Ayengee Labs develops focused software tools emphasizing on-device intelligence, privacy-first storage architectures, and human productivity without mandatory cloud dependencies.
       </p>
     </div>
 
-    <!-- Product Showcase -->
-    <section id="apps">
-      <div class="flex items-center justify-between mb-8 border-b border-gray-800 pb-3">
-        <h2 class="text-2xl font-bold text-white tracking-tight">Active Products</h2>
-        <span class="text-xs text-gray-500 font-mono">Verified Google Play Publisher</span>
+    <!-- Product Showcase (Responsive 2x2 Grid with Breathing Room) -->
+    <section id="apps" class="scroll-mt-12">
+      <div class="flex items-center justify-between mb-8 pb-3 border-b" style="border-color: var(--border-header);">
+        <h2 class="text-2xl font-bold tracking-tight" style="color: var(--text-primary);">Active Products</h2>
+        <span class="text-xs font-mono" style="color: var(--text-muted);">Verified Google Play Publisher</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         <!-- Pomo-One Card -->
-        <div class="bg-[#121620] border border-gray-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-orange-500/50 transition shadow-lg shadow-black/20">
+        <div class="themed-card border rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-2xl font-bold text-white">Pomo-One</h3>
-              <span class="text-xs font-mono bg-orange-950 text-orange-300 px-2.5 py-1 rounded-full border border-orange-800/40">Focus Instrument</span>
+            <!-- Utility Row: Icon + Badge -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background-color: var(--badge-bg-pomo); border: 1px solid var(--badge-border-pomo);">
+                🍅
+              </div>
+              <span class="text-xs font-mono font-medium px-3 py-1 rounded-full border" style="background-color: var(--badge-bg-pomo); color: var(--badge-text-pomo); border-color: var(--badge-border-pomo);">
+                Focus Instrument
+              </span>
             </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+
+            <!-- Title & Description -->
+            <h3 class="text-2xl font-bold tracking-tight mb-2.5" style="color: var(--text-primary);">
+              Pomo-One
+            </h3>
+            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
               An intentional focus instrument built with Swiss minimalism. Physical motion sensors, acoustic metronomes, hardware-enforced stillness, and zero subscription paywalls.
             </p>
+
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Physical Stillness</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Do Not Disturb</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Local-First</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
-            <a href="/apps/pomoone.html" class="text-sm font-medium text-orange-400 hover:text-orange-300">Product Details &rarr;</a>
-            <a href="/privacy/pomoone.html" class="text-xs text-gray-500 hover:text-gray-400">Privacy Policy</a>
+
+          <!-- Card Actions -->
+          <div class="flex items-center justify-between pt-4 border-t" style="border-color: var(--border-card);">
+            <a href="/apps/pomoone.html" class="text-sm font-semibold text-orange-500 hover:text-orange-600 transition flex items-center gap-1">
+              <span>Product Details</span> <span>&rarr;</span>
+            </a>
+            <a href="/privacy/pomoone.html" class="text-xs transition hover:underline" style="color: var(--text-muted);">
+              Privacy Policy
+            </a>
           </div>
         </div>
 
         <!-- Telepath Card -->
-        <div class="bg-[#121620] border border-gray-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-violet-500/50 transition shadow-lg shadow-black/20">
+        <div class="themed-card border rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-2xl font-bold text-white">Telepath</h3>
-              <span class="text-xs font-mono bg-violet-950 text-violet-300 px-2.5 py-1 rounded-full border border-violet-800/40">Early Access</span>
+            <!-- Utility Row: Icon + Badge -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background-color: var(--badge-bg-telepath); border: 1px solid var(--badge-border-telepath);">
+                🧠
+              </div>
+              <span class="text-xs font-mono font-medium px-3 py-1 rounded-full border" style="background-color: var(--badge-bg-telepath); color: var(--badge-text-telepath); border-color: var(--badge-border-telepath);">
+                Early Access
+              </span>
             </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+
+            <!-- Title & Description -->
+            <h3 class="text-2xl font-bold tracking-tight mb-2.5" style="color: var(--text-primary);">
+              Telepath
+            </h3>
+            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
               A local-first cognitive thought organizer and thread evolution graph. Captures fragmented ideas and maps them into an interconnected knowledge tree without cloud dependencies.
             </p>
+
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Self-Chat UI</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Follow-up Trees</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">AES-256</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
-            <a href="/apps/telepath.html" class="text-sm font-medium text-violet-400 hover:text-violet-300">Product Details &rarr;</a>
-            <a href="/privacy/telepath.html" class="text-xs text-gray-500 hover:text-gray-400">Privacy Policy</a>
+
+          <!-- Card Actions -->
+          <div class="flex items-center justify-between pt-4 border-t" style="border-color: var(--border-card);">
+            <a href="/apps/telepath.html" class="text-sm font-semibold text-violet-500 hover:text-violet-600 transition flex items-center gap-1">
+              <span>Product Details</span> <span>&rarr;</span>
+            </a>
+            <a href="/privacy/telepath.html" class="text-xs transition hover:underline" style="color: var(--text-muted);">
+              Privacy Policy
+            </a>
           </div>
         </div>
 
         <!-- FortressFi Card -->
-        <div class="bg-[#121620] border border-gray-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition shadow-lg shadow-black/20">
+        <div class="themed-card border rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-2xl font-bold text-white">FortressFi</h3>
-              <span class="text-xs font-mono bg-emerald-950 text-emerald-300 px-2.5 py-1 rounded-full border border-emerald-800/40">Android Utility</span>
+            <!-- Utility Row: Icon + Badge -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background-color: var(--badge-bg-fortress); border: 1px solid var(--badge-border-fortress);">
+                🛡️
+              </div>
+              <span class="text-xs font-mono font-medium px-3 py-1 rounded-full border" style="background-color: var(--badge-bg-fortress); color: var(--badge-text-fortress); border-color: var(--badge-border-fortress);">
+                Android Utility
+              </span>
             </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+
+            <!-- Title & Description -->
+            <h3 class="text-2xl font-bold tracking-tight mb-2.5" style="color: var(--text-primary);">
+              FortressFi
+            </h3>
+            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
               Offline-first wealth tracking and biometric vault management supporting multi-currency calculations and localized number systems with zero telemetry.
             </p>
+
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Hardware Keystore</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Multi-Currency</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Offline Vault</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
-            <a href="/apps/fortressfi.html" class="text-sm font-medium text-emerald-400 hover:text-emerald-300">Product Details &rarr;</a>
-            <a href="/privacy/fortressfi.html" class="text-xs text-gray-500 hover:text-gray-400">Privacy Policy</a>
+
+          <!-- Card Actions -->
+          <div class="flex items-center justify-between pt-4 border-t" style="border-color: var(--border-card);">
+            <a href="/apps/fortressfi.html" class="text-sm font-semibold text-emerald-500 hover:text-emerald-600 transition flex items-center gap-1">
+              <span>Product Details</span> <span>&rarr;</span>
+            </a>
+            <a href="/privacy/fortressfi.html" class="text-xs transition hover:underline" style="color: var(--text-muted);">
+              Privacy Policy
+            </a>
           </div>
         </div>
 
         <!-- Eduplay Card -->
-        <div class="bg-[#121620] border border-gray-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-500/50 transition shadow-lg shadow-black/20">
+        <div class="themed-card border rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-2xl font-bold text-white">Eduplay</h3>
-              <span class="text-xs font-mono bg-amber-950 text-amber-300 px-2.5 py-1 rounded-full border border-amber-800/40">Learning Suite</span>
+            <!-- Utility Row: Icon + Badge -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background-color: var(--badge-bg-eduplay); border: 1px solid var(--badge-border-eduplay);">
+                🧩
+              </div>
+              <span class="text-xs font-mono font-medium px-3 py-1 rounded-full border" style="background-color: var(--badge-bg-eduplay); color: var(--badge-text-eduplay); border-color: var(--badge-border-eduplay);">
+                Learning Suite
+              </span>
             </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+
+            <!-- Title & Description -->
+            <h3 class="text-2xl font-bold tracking-tight mb-2.5" style="color: var(--text-primary);">
+              Eduplay
+            </h3>
+            <p class="text-sm leading-relaxed mb-6" style="color: var(--text-secondary);">
               Interactive cognitive learning and memory retention modules built for curiosity-driven exploration, offline accessibility, and adaptive micro-challenges.
             </p>
+
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Spaced Repetition</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Family Safe</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-md opacity-80" style="background-color: var(--btn-theme-bg); border: 1px solid var(--btn-theme-border); color: var(--text-secondary);">Child-Privacy</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
-            <a href="/apps/eduplay.html" class="text-sm font-medium text-amber-400 hover:text-amber-300">Product Details &rarr;</a>
-            <a href="/privacy/eduplay.html" class="text-xs text-gray-500 hover:text-gray-400">Privacy Policy</a>
+
+          <!-- Card Actions -->
+          <div class="flex items-center justify-between pt-4 border-t" style="border-color: var(--border-card);">
+            <a href="/apps/eduplay.html" class="text-sm font-semibold text-amber-500 hover:text-amber-600 transition flex items-center gap-1">
+              <span>Product Details</span> <span>&rarr;</span>
+            </a>
+            <a href="/privacy/eduplay.html" class="text-xs transition hover:underline" style="color: var(--text-muted);">
+              Privacy Policy
+            </a>
           </div>
         </div>
       </div>
@@ -113,15 +416,71 @@
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-800/80 py-8 px-6 text-center text-xs text-gray-500">
+  <footer class="py-8 px-6 text-center text-xs border-t transition-colors" style="border-color: var(--border-header); color: var(--text-muted);">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <p>&copy; 2026 Ayengee Labs. All rights reserved.</p>
       <div class="space-x-4">
-        <a href="/contact.html" class="hover:text-gray-300">Contact & Support</a>
+        <a href="/contact.html" class="transition hover:underline" style="color: var(--text-secondary);">Contact & Support</a>
         <span>&bull;</span>
-        <a href="https://github.com/ayengeelabs/ayengeelabs.github.io" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300">GitHub</a>
+        <a href="https://github.com/ayengeelabs/ayengeelabs.github.io" target="_blank" rel="noopener noreferrer" class="transition hover:underline" style="color: var(--text-secondary);">GitHub</a>
       </div>
     </div>
   </footer>
+
+  <!-- Theme Switcher Client Logic -->
+  <script>
+    const themeDisplayNames = {
+      'default': 'Theme: Default',
+      'warm-slate': 'Theme: Warm Slate',
+      'cool-frost': 'Theme: Cool Frost',
+      'editorial-sand': 'Theme: Editorial Sand'
+    };
+
+    function toggleThemeMenu() {
+      const dropdown = document.getElementById('themeDropdown');
+      const isHidden = dropdown.classList.contains('hidden');
+      if (isHidden) {
+        dropdown.classList.remove('hidden');
+      } else {
+        dropdown.classList.add('hidden');
+      }
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('ayengee-theme', theme);
+      updateThemeUI(theme);
+      document.getElementById('themeDropdown').classList.add('hidden');
+    }
+
+    function updateThemeUI(theme) {
+      document.getElementById('currentThemeName').innerText = themeDisplayNames[theme] || 'Theme: Default';
+      ['default', 'warm-slate', 'cool-frost', 'editorial-sand'].forEach(t => {
+        const el = document.getElementById('check-' + t);
+        if (el) {
+          if (t === theme) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    // Close dropdown on outside click
+    window.addEventListener('click', function(e) {
+      const btn = document.getElementById('themeMenuBtn');
+      const dropdown = document.getElementById('themeDropdown');
+      if (btn && dropdown && !btn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+
+    // Sync UI on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const current = localStorage.getItem('ayengee-theme') || 'default';
+      updateThemeUI(current);
+    });
+  </script>
 </body>
 </html>
